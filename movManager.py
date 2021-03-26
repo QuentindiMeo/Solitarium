@@ -11,10 +11,10 @@ import pygame as pg
 def posManager(pPos, pMov):
     pPos[0] += pMov[0]
     pPos[1] += pMov[1]
-    if (pPos[0] < 0):    pPos[0] = 0
-    if (pPos[1] < 0):    pPos[1] = 0
-    if (pPos[0] > 1192): pPos[0] = 1192
-    if (pPos[1] > 892):  pPos[1] = 892
+    if (pPos[0] < 100):  pPos[0] = 100
+    if (pPos[1] < 100):  pPos[1] = 100
+    if (pPos[0] > 1091): pPos[0] = 1091
+    if (pPos[1] > 791):  pPos[1] = 791
     return pPos
 
 def movManager(evt, pMov, pSpe):
@@ -32,5 +32,5 @@ def movManager(evt, pMov, pSpe):
     if (evt.type == pg.KEYUP and (evt.key == pg.K_DOWN  or evt.key == pg.K_UP)):
         pMov[1] = 0
     if (evt.type == pg.KEYDOWN and evt.key == pg.K_c):
-        pSpe = (25 if (pSpe == 5) else 5)
+        pSpe = (20 if (pSpe == 5) else 5)
     return (pMov, pSpe)
