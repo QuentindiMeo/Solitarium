@@ -6,9 +6,14 @@
 ## jamgame tool functions
 ##
 
+import time
 import random as rng
 from myEnums  import *
 from managers import lng
+
+def getLife(sTim):
+    act = time.time() - sTim
+    return 210 - 210 * (act / 514.734)
 
 def pickText(state, lang):
     fil = open('assets/text/dialog' + str(lang.value) + '.txt')

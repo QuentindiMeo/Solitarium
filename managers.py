@@ -14,24 +14,24 @@ def chatting(p1, p2):
     return ((p1[0] > p2[0] - 16 and p1[0] < p2[0] + 16) and\
             (p1[1] > p2[1] - 16 and p1[1] < p2[1] + 16))
 
-def frndManager(evt, pPos, nPpl, nbFr, nbIt, lang):
+def frndManager(evt, pPos, nPpl, stat, lang):
     if (evt.type == pg.KEYUP and evt.key == pg.K_RETURN):
         for x in range(len(nPpl)):
             if (chatting(pPos, nPpl[x][0]) and nPpl[x][2] == sts.F_UNKN):
-                nbIt += 1
+                stat[1] += 1
                 if (rng.randint(0, 99) < 77):
-                    nPpl[x][1] = pg.image.load('assets/friend.png')
+                    nPpl[x][1] = pg.image.load('assets/img/friend.png')
                     nPpl[x][2] = sts.F_FRND
-                    nbFr += 1
+                    stat[0] += 1
                     break
     if (evt.type == pg.KEYUP and evt.key == pg.K_BACKSPACE):
         for x in range(len(nPpl)):
             if (chatting(pPos, nPpl[x][0]) and nPpl[x][2] == sts.F_UNKN):
-                nbIt += 1
+                stat[1] += 1
                 if (rng.randint(0, 99) < 88):
-                    nPpl[x][1] = pg.image.load('assets/penemy.png')
+                    nPpl[x][1] = pg.image.load('assets/img/penemy.png')
                     nPpl[x][2] = sts.F_ENMY
-                    nbFr -= 1
+                    stat[0] -= 1
                     break
     if (evt.type == pg.KEYUP and evt.key == pg.K_l):
         if   (lang == lng.FR): lang = lng.EN
@@ -39,7 +39,7 @@ def frndManager(evt, pPos, nPpl, nbFr, nbIt, lang):
 #        elif (lang == lng.EN): lang = lng.DE
 #        elif (lang == lng.DE): lang = lng.IT
 #        elif (lang == lng.IT): lang = lng.FR
-    return (nPpl, nbFr, nbIt, lang)
+    return (nPpl, stat[0], stat[1], lang)
 
 def posManager(pPos, pMov):
     nCha = False
