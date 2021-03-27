@@ -6,7 +6,30 @@
 ## main jamgame
 ##
 
+from enum import Enum
 import pygame as pg
+
+class lng(Enum):
+    FR = 0
+    EN = 1
+    DE = 2
+    IT = 3
+
+def collide(p1, p2):
+    return ((p1[0] > p2[0] - 64 and p1[0] < p2[0] + 64) and\
+            (p1[1] > p2[1] - 64 and p1[1] < p2[1] + 64))
+
+def frndManager(evt, nPpl, lang):
+    if (evt.type == pg.KEYUP and evt.key == pg.K_RETURN):
+        e = 1
+    if (evt.type == pg.KEYUP and evt.key == pg.K_BACKSPACE):
+        e = 1
+    if (evt.type == pg.KEYUP and evt.key == pg.K_l):
+        if   (lang == lng.FR): lang = lng.EN
+        elif (lang == lng.EN): lang = lng.DE
+        elif (lang == lng.DE): lang = lng.IT
+        elif (lang == lng.IT): lang = lng.FR
+    return (nPpl, lang)
 
 def posManager(pPos, pMov):
     pPos[0] += pMov[0]

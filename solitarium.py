@@ -8,8 +8,8 @@
 
 import pygame as pg
 import random as rng
-from movManager import *
-from tool       import *
+from managers import *
+from tool     import *
 
 def main():
     pg.init()
@@ -30,6 +30,7 @@ def main():
     nPos = []
     nPpl = []
     tBub = [[0, -300], pg.image.load('assets/bubble.png'), []]
+    lang = lng.FR
 
     def txt(font, msg, color = [255, 255, 255]):
         return font.render(msg, True, color)
@@ -41,6 +42,7 @@ def main():
                 (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE)):
                 noEsc = False
             (pMov, pSpe) = movManager(event, pMov, pSpe, nbFr)
+            (nPpl, lang) = frndManager(event, nPpl, lang)
         pPos = posManager(pPos, pMov)
 #        if (inTheRoom < 10 and rng.randint(0, 255) == 0):
         if (inTheRoom < 10 and rng.randint(0, 2) == 0):
@@ -54,7 +56,7 @@ def main():
         scr.blit(pBor, [80,80])
         for ppl in nPpl:
             scr.blit(ppl[1], ppl[0])
-        tBub = get_tBub(pPos, nPpl, tBub)
+        tBub = get_tBub(pPos, nPpl, tBub, lang)
         scr.blit(tBub[1], tBub[0])
         for i in range(len(tBub[2])):
             scr.blit(txt(fFnt, tBub[2][i]), [tBub[0][0] + 9, tBub[0][1] + 6 + i * 30])
