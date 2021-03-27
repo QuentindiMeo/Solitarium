@@ -6,6 +6,7 @@
 ## main jamgame
 ##
 
+import time
 import random as rng
 from      sys import argv as av
 from endgame  import *
@@ -32,26 +33,33 @@ def main():
     nPos = []
     nPpl = []
     tBub = [[0, -300], pg.image.load('assets/bubble.png'), []]
+    nCha = False
     lang = lng.FR
     noEsc = True
 
+    sTim = time.time()
     while (noEsc):
         for event in pg.event.get():
             if (event.type == pg.QUIT or\
                 (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE)):
                 noEsc = False
             if (event.type == pg.KEYDOWN and event.key == pg.K_e):
-                endGame(scr, [fFnt, sFnt], [nbFr, nbIt], lang)
+                endGame(scr, [fFnt, sFnt], [nbFr, nbIt, sTim], lang)
                 noEsc = False
             (pMov, pSpe) = moveManager(event, pMov, pSpe, nbFr)
-            (nPpl, nbIt, lang) = frndManager(event, pPos, nPpl, nbIt, lang)
-        pPos = posManager(pPos, pMov)
+            (nPpl, nbFr, nbIt, lang) = frndManager(event, pPos, nPpl, nbFr, nbIt, lang)
 #        if (inTheRoom < 10 and rng.randint(0, 255) == 0):
-        if (inTheRoom < 32 and rng.randint(0, 1) == 0):
+        if (inTheRoom < 22 and rng.randint(0, 1) == 0):
             newNpc = genNewNPC(nPos)
             nPos.append(newNpc)
             nPpl.append([newNpc, pg.image.load('assets/charac.png'), sts.F_UNKN])
             inTheRoom += 1
+        (pPos, nCha) = posManager(pPos, pMov)
+        if (nCha):
+            nPos = []
+            nPpl = []
+            inTheRoom = 1
+            nCha = False
         scr.fill([22, 22, 22])
         scr.blit(txt(sFnt, "SOLITARIUM", [24, 119, 242]), [460, 16])
         scr.blit(txt(fFnt, "Friends: " + str(nbFr)), [32, 28])
@@ -64,6 +72,9 @@ def main():
             scr.blit(txt(fFnt, tBub[2][i]), [tBub[0][0] + 9, tBub[0][1] + 7 + i * 30])
         scr.blit(pImg, pPos)
         if (noEsc): pg.display.update()
+        if (time.time() - sTim > 514.734):
+            endGame(scr, [fFnt, sFnt], [nbFr, nbIt, sTim], lang)
+            noEsc = False
 
 if (__name__ == "__main__"):
     if ("-h" in av or "--help" in av):

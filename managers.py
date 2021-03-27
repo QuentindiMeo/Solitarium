@@ -14,7 +14,7 @@ def chatting(p1, p2):
     return ((p1[0] > p2[0] - 16 and p1[0] < p2[0] + 16) and\
             (p1[1] > p2[1] - 16 and p1[1] < p2[1] + 16))
 
-def frndManager(evt, pPos, nPpl, nbIt, lang):
+def frndManager(evt, pPos, nPpl, nbFr, nbIt, lang):
     if (evt.type == pg.KEYUP and evt.key == pg.K_RETURN):
         for x in range(len(nPpl)):
             if (chatting(pPos, nPpl[x][0]) and nPpl[x][2] == sts.F_UNKN):
@@ -22,6 +22,7 @@ def frndManager(evt, pPos, nPpl, nbIt, lang):
                 if (rng.randint(0, 99) < 77):
                     nPpl[x][1] = pg.image.load('assets/friend.png')
                     nPpl[x][2] = sts.F_FRND
+                    nbFr += 1
                     break
     if (evt.type == pg.KEYUP and evt.key == pg.K_BACKSPACE):
         for x in range(len(nPpl)):
@@ -30,6 +31,7 @@ def frndManager(evt, pPos, nPpl, nbIt, lang):
                 if (rng.randint(0, 99) < 88):
                     nPpl[x][1] = pg.image.load('assets/penemy.png')
                     nPpl[x][2] = sts.F_ENMY
+                    nbFr -= 1
                     break
     if (evt.type == pg.KEYUP and evt.key == pg.K_l):
         if   (lang == lng.FR): lang = lng.EN
@@ -37,16 +39,30 @@ def frndManager(evt, pPos, nPpl, nbIt, lang):
 #        elif (lang == lng.EN): lang = lng.DE
 #        elif (lang == lng.DE): lang = lng.IT
 #        elif (lang == lng.IT): lang = lng.FR
-    return (nPpl, nbIt, lang)
+    return (nPpl, nbFr, nbIt, lang)
 
 def posManager(pPos, pMov):
+    nCha = False
+
     pPos[0] += pMov[0]
     pPos[1] += pMov[1]
     if (pPos[0] < 100):  pPos[0] = 100
     if (pPos[1] < 100):  pPos[1] = 100
     if (pPos[0] > 1091): pPos[0] = 1091
     if (pPos[1] > 791):  pPos[1] = 791
-    return pPos
+    if (pPos[0] < 110 and (pPos[1] > 425 and pPos[1] < 475)):
+        pPos[0] = 1081
+        nCha = True
+    if (pPos[0] > 1081 and (pPos[1] > 425 and pPos[1] < 475)):
+        pPos[0] = 110
+        nCha = True
+    if (pPos[1] < 110 and (pPos[0] > 575 and pPos[0] < 625)):
+        pPos[1] = 781
+        nCha = True
+    if (pPos[1] > 781 and (pPos[0] > 575 and pPos[0] < 625)):
+        pPos[1] = 110
+        nCha = True
+    return (pPos, nCha)
 
 def calc_pSpe(nbFr):
     return 5 + nbFr * 0.1

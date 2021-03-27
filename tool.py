@@ -37,8 +37,8 @@ def get_tBub(p, nPpl, tBub, lang):
 
 def collideAny(p, arr):
     for occP in arr:
-        if ((p[0] > occP[0] - 64 and p[0] < occP[0] + 64) and
-            (p[1] > occP[1] - 64 and p[1] < occP[1] + 64)):
+        if ((p[0] > occP[0] - 96 and p[0] < occP[0] + 96) and
+            (p[1] > occP[1] - 96 and p[1] < occP[1] + 96)):
             return True
     return False
 
