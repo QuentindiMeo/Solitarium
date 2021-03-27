@@ -7,35 +7,18 @@
 ##
 
 import pygame as pg
-import random
+import random as rng
 from movManager import *
-
-def genNewNPC(fkf):
-    pos = [random.randint(200, 991), random.randint(200, 691)]
-
-    def collideAny(p, arr):
-        for occP in arr:
-            if ((p[0] > occP[0] - 64 and p[0] < occP[0] + 64) and\
-                (p[1] > occP[1] - 64 and p[1] < occP[1] + 64)):
-#                print (pos, "collides", occP)
-                return True
-        return False
-
-    while (collideAny(pos, fkf)):
-        pos = [random.randint(100, 1091), random.randint(100, 791)]
-    return pos
-
-def dispEnt(scr, eImg, ePos):
-    scr.blit(eImg, ePos)
+from tool       import *
 
 def main():
     pg.init()
     scr = pg.display.set_mode([1200, 900])
     pg.display.set_caption("Solitarium")
-    pg.display.set_icon(pg.image.load('assets/player.png'))
+    pg.display.set_icon(pg.image.load('assets/charac.png'))
 #    pg.mixer.music.load('')
 #    pg.mixer.music.play(-1)
-    fnt  = pg.font.Font('assets/txt.ttf', 26)
+    fFnt = pg.font.Font('assets/txt.ttf', 26)
     sFnt = pg.font.Font('assets/txt.ttf', 48)
     pImg = pg.image.load('assets/player.png')
     pBor = pg.image.load('assets/border.png')
@@ -44,28 +27,38 @@ def main():
     pSpe = 5
     nbFr = 0
     inTheRoom = 1
-    fkf = []
+    nPos = []
+    nPpl = []
+    tBub = [[0, -300], pg.image.load('assets/bubble.png'), []]
 
     def txt(font, msg, color = [255, 255, 255]):
         return font.render(msg, True, color)
 
-    running = True
-    while (running):
+    noEsc = True
+    while (noEsc):
         for event in pg.event.get():
-            if (event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE)):
-                running = False
-            (pMov, pSpe) = movManager(event, pMov, pSpe)
+            if (event.type == pg.QUIT or\
+                (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE)):
+                noEsc = False
+            (pMov, pSpe) = movManager(event, pMov, pSpe, nbFr)
         pPos = posManager(pPos, pMov)
-        if (inTheRoom < 10 and random.randint(0, 256) == 0):
-            fkf.append(genNewNPC(fkf))
+#        if (inTheRoom < 10 and rng.randint(0, 255) == 0):
+        if (inTheRoom < 10 and rng.randint(0, 2) == 0):
+            newNpc = genNewNPC(nPos)
+            nPos.append(newNpc)
+            nPpl.append([newNpc, pg.image.load('assets/charac.png'), sts.F_UNKN])
             inTheRoom += 1
         scr.fill([22, 22, 22])
-        dispEnt(scr, txt(sFnt, "SOLITARIUM", [24, 119, 242]), [460, 16])
-        dispEnt(scr, txt(fnt, "Friends: " + str(nbFr)), [32, 28])
-        dispEnt(scr, pBor, [80,80])
-        dispEnt(scr, pImg, pPos)
-        for npc in fkf:
-            dispEnt(scr, pImg, npc)
+        scr.blit(txt(sFnt, "SOLITARIUM", [24, 119, 242]), [460, 16])
+        scr.blit(txt(fFnt, "Friends: " + str(nbFr)), [32, 28])
+        scr.blit(pBor, [80,80])
+        for ppl in nPpl:
+            scr.blit(ppl[1], ppl[0])
+        tBub = get_tBub(pPos, nPpl, tBub)
+        scr.blit(tBub[1], tBub[0])
+        for i in range(len(tBub[2])):
+            scr.blit(txt(fFnt, tBub[2][i]), [tBub[0][0] + 9, tBub[0][1] + 6 + i * 30])
+        scr.blit(pImg, pPos)
         pg.display.update()
 
 if (__name__ == "__main__"):

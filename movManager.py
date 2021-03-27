@@ -17,7 +17,10 @@ def posManager(pPos, pMov):
     if (pPos[1] > 791):  pPos[1] = 791
     return pPos
 
-def movManager(evt, pMov, pSpe):
+def calc_pSpe(nbFr):
+    return 5 + nbFr * 0.1
+
+def movManager(evt, pMov, pSpe, nbFr):
     if (evt.type == pg.KEYDOWN):
         if (evt.key == pg.K_RIGHT):
             pMov[0] = pSpe
@@ -31,6 +34,4 @@ def movManager(evt, pMov, pSpe):
         pMov[0] = 0
     if (evt.type == pg.KEYUP and (evt.key == pg.K_DOWN  or evt.key == pg.K_UP)):
         pMov[1] = 0
-    if (evt.type == pg.KEYDOWN and evt.key == pg.K_c):
-        pSpe = (20 if (pSpe == 5) else 5)
-    return (pMov, pSpe)
+    return (pMov, calc_pSpe(nbFr))
