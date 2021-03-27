@@ -7,16 +7,11 @@
 ##
 
 import random as rng
-from enum import Enum
-from managers import collide, lng
-
-class sts(Enum):
-    F_UNKN = 0
-    F_FRND = 1
-    F_ENMY = 2
+from myEnums  import *
+from managers import lng
 
 def pickText(state, lang):
-    fil = open('assets/txt/dialog' + str(lang.value) + '.txt')
+    fil = open('assets/text/dialog' + str(lang.value) + '.txt')
     stk = []
     nls = 0
 
@@ -33,8 +28,8 @@ def pickText(state, lang):
 
 def get_tBub(p, nPpl, tBub, lang):
     for cPpl in nPpl:
-        if ((p[0] > cPpl[0][0] - 9 and p[0] < cPpl[0][0] + 9) and\
-            (p[1] > cPpl[0][1] - 9 and p[1] < cPpl[0][1] + 9)):
+        if ((p[0] > cPpl[0][0] - 16 and p[0] < cPpl[0][0] + 16) and\
+            (p[1] > cPpl[0][1] - 16 and p[1] < cPpl[0][1] + 16)):
             tBub[0] = [cPpl[0][0] - 93, cPpl[0][1] - 119]
             if (tBub[2] == []): tBub[2] = pickText(cPpl[2].value, lang)
             return tBub
@@ -42,7 +37,8 @@ def get_tBub(p, nPpl, tBub, lang):
 
 def collideAny(p, arr):
     for occP in arr:
-        if (collide(p, occP)):
+        if ((p[0] > occP[0] - 64 and p[0] < occP[0] + 64) and
+            (p[1] > occP[1] - 64 and p[1] < occP[1] + 64)):
             return True
     return False
 
@@ -50,5 +46,8 @@ def genNewNPC(ppl):
     pos = [rng.randint(220, 1041), rng.randint(220, 741)]
 
     while (collideAny(pos, ppl)):
-        pos = [rng.randint(100, 1041), rng.randint(100, 741)]
+        pos = [rng.randint(220, 1041), rng.randint(220, 741)]
     return pos
+
+def txt(font, msg, color = [255, 255, 255]):
+    return font.render(msg, True, color)

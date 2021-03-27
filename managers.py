@@ -3,33 +3,41 @@
 ## EPITECH PROJECT, 2021
 ## Jam
 ## File description:
-## main jamgame
+## jamgame manager functions
 ##
 
-from enum import Enum
+from  myEnums import *
 import pygame as pg
+import random as rng
 
-class lng(Enum):
-    FR = 0
-    EN = 1
-    DE = 2
-    IT = 3
+def chatting(p1, p2):
+    return ((p1[0] > p2[0] - 16 and p1[0] < p2[0] + 16) and\
+            (p1[1] > p2[1] - 16 and p1[1] < p2[1] + 16))
 
-def collide(p1, p2):
-    return ((p1[0] > p2[0] - 64 and p1[0] < p2[0] + 64) and\
-            (p1[1] > p2[1] - 64 and p1[1] < p2[1] + 64))
-
-def frndManager(evt, nPpl, lang):
+def frndManager(evt, pPos, nPpl, nbIt, lang):
     if (evt.type == pg.KEYUP and evt.key == pg.K_RETURN):
-        e = 1
+        for x in range(len(nPpl)):
+            if (chatting(pPos, nPpl[x][0]) and nPpl[x][2] == sts.F_UNKN):
+                nbIt += 1
+                if (rng.randint(0, 99) < 77):
+                    nPpl[x][1] = pg.image.load('assets/friend.png')
+                    nPpl[x][2] = sts.F_FRND
+                    break
     if (evt.type == pg.KEYUP and evt.key == pg.K_BACKSPACE):
-        e = 1
+        for x in range(len(nPpl)):
+            if (chatting(pPos, nPpl[x][0]) and nPpl[x][2] == sts.F_UNKN):
+                nbIt += 1
+                if (rng.randint(0, 99) < 88):
+                    nPpl[x][1] = pg.image.load('assets/penemy.png')
+                    nPpl[x][2] = sts.F_ENMY
+                    break
     if (evt.type == pg.KEYUP and evt.key == pg.K_l):
         if   (lang == lng.FR): lang = lng.EN
-        elif (lang == lng.EN): lang = lng.DE
-        elif (lang == lng.DE): lang = lng.IT
-        elif (lang == lng.IT): lang = lng.FR
-    return (nPpl, lang)
+        elif (lang == lng.EN): lang = lng.FR
+#        elif (lang == lng.EN): lang = lng.DE
+#        elif (lang == lng.DE): lang = lng.IT
+#        elif (lang == lng.IT): lang = lng.FR
+    return (nPpl, nbIt, lang)
 
 def posManager(pPos, pMov):
     pPos[0] += pMov[0]
@@ -43,7 +51,7 @@ def posManager(pPos, pMov):
 def calc_pSpe(nbFr):
     return 5 + nbFr * 0.1
 
-def movManager(evt, pMov, pSpe, nbFr):
+def moveManager(evt, pMov, pSpe, nbFr):
     if (evt.type == pg.KEYDOWN):
         if (evt.key == pg.K_RIGHT):
             pMov[0] = pSpe
