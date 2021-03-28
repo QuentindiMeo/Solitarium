@@ -1,0 +1,13 @@
+Amis : 
+Vie :
+Vous vous êtes fait ; amis.
+Score final : 
+Appuyez sur 'q' pour quitter, 'r' pour rejouer.
+Il faut savoir se poser les bonnes questions.;Les amis mentent aussi.
+
+Friends: 
+Life:
+You made ; friends.
+Final score: 
+Press 'q' to quit, 'r' to play again.
+You may want to reconsider your life choices.;Friends lie too.

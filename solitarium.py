@@ -9,9 +9,9 @@
 import time
 import random as rng
 from      sys import argv as av
-from endgame  import *
+from endgame  import endGame
 from managers import *
-from tool     import genNewNPC, get_tBub, getLife, res
+from tool     import genNewNPC, get_tBub, getLife, res, txt
 
 def main():
     pg.init()
@@ -37,6 +37,7 @@ def main():
     tBub = [[0, -300], pg.image.load('assets/img/bubble.png'), []]
     nCha = False
     lang = lng.FR
+    iTxt = getText(lang)
     noEsc = True
 
     sTim = time.time()
@@ -47,12 +48,14 @@ def main():
                 (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE)):
                 noEsc = False
             if (event.type == pg.KEYDOWN and event.key == pg.K_e):
-                if (not endGame(scr, [fFnt, sFnt], [nbFr, nbIt, sTim], lang)):
+                if (not endGame(scr, [fFnt, sFnt], [nbFr, nbIt, sTim], iTxt)):
                     (pPos, pSpe, nbFr, nbIt, nPos, nPpl, inRm, lang, sTim) = res()
+                    pg.mixer.music.play()
                 else: noEsc = False
             (pMov, pSpe) = moveManager(event, pMov, pSpe, nbFr)
-            (nPpl, nbFr, nbIt, lang) = frndManager(event, pPos, nPpl, [nbFr, nbIt], lang)
-        if (inRm < 10 and rng.randint(0, 255) == 0):
+            (nPpl, nbFr, nbIt, iTxt, lang) = frndManager(event, pPos, nPpl, [nbFr, nbIt], iTxt, lang)
+#        if (inRm < 10 and rng.randint(0, 127) == 0):
+        if (inRm < 20 and rng.randint(0, 2) == 0):
             newNpc = genNewNPC(nPos)
             nPos.append(newNpc)
             nPpl.append([newNpc, pg.image.load('assets/img/charac.png'), sts.F_UNKN])
@@ -68,8 +71,8 @@ def main():
             nCha = False
         scr.fill([22, 22, 22])
         scr.blit(txt(sFnt, "SOLITARIUM", [24, 119, 242]), [460, 16])
-        scr.blit(txt(fFnt, "Friends: " + str(nbFr)), [32, 28])
-        scr.blit(txt(fFnt, "Life: "), [832, 28])
+        scr.blit(txt(fFnt, iTxt[0] + str(nbFr)), [32, 28])
+        scr.blit(txt(fFnt, iTxt[1]), [832, 28])
         pg.draw.rect(scr, [210, 0, 0], [910, 30, getLife(sTim), 20])
         scr.blit(pBor, [80,80])
         for ppl in nPpl:
@@ -81,8 +84,9 @@ def main():
         scr.blit(pImg, pPos)
         if (noEsc): pg.display.update()
         if (time.time() - sTim > 514.734):
-            if (not endGame(scr, [fFnt, sFnt], [nbFr, nbIt, sTim], lang)):
+            if (not endGame(scr, [fFnt, sFnt], [nbFr, nbIt, sTim], iTxt)):
                 (pPos, pSpe, nbFr, nbIt, nPos, nPpl, inRm, lang, sTim) = res()
+                pg.mixer.music.play()
             else: noEsc = False
 
 if (__name__ == "__main__"):

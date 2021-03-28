@@ -18,3 +18,10 @@ class sts(Enum):
     F_UNKN = 0
     F_FRND = 1
     F_ENMY = 2
+
+class gui(Enum):
+    I_FRND = 0
+    I_LIFE = 1
+    I_NBFR = 2
+    I_FSCO = 3
+    I_INPT = 4

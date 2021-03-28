@@ -6,29 +6,30 @@
 ## jamgame manager functions
 ##
 
-from  myEnums import *
 import pygame as pg
 import random as rng
+from  myEnums import *
+from     tool import getText
 
 def chatting(p1, p2):
     return ((p1[0] > p2[0] - 16 and p1[0] < p2[0] + 16) and\
             (p1[1] > p2[1] - 16 and p1[1] < p2[1] + 16))
 
-def frndManager(evt, pPos, nPpl, stat, lang):
+def frndManager(evt, pPos, nPpl, stat, iTxt, lang):
     if (evt.type == pg.KEYUP and evt.key == pg.K_RETURN):
         for x in range(len(nPpl)):
-            if (chatting(pPos, nPpl[x][0]) and nPpl[x][2] == sts.F_UNKN):
+            if (chatting(pPos, nPpl[x][0])):
                 stat[1] += 1
-                if (rng.randint(0, 99) < 77):
+                if (nPpl[x][2] == sts.F_UNKN and rng.randint(0, 99) < 66):
                     nPpl[x][1] = pg.image.load('assets/img/friend.png')
                     nPpl[x][2] = sts.F_FRND
                     stat[0] += 1
                     break
     if (evt.type == pg.KEYUP and evt.key == pg.K_BACKSPACE):
         for x in range(len(nPpl)):
-            if (chatting(pPos, nPpl[x][0]) and nPpl[x][2] == sts.F_UNKN):
+            if (chatting(pPos, nPpl[x][0])):
                 stat[1] += 1
-                if (rng.randint(0, 99) < 88):
+                if (nPpl[x][2] == sts.F_UNKN and rng.randint(0, 99) < 77):
                     nPpl[x][1] = pg.image.load('assets/img/penemy.png')
                     nPpl[x][2] = sts.F_ENMY
                     stat[0] -= 1
@@ -36,10 +37,11 @@ def frndManager(evt, pPos, nPpl, stat, lang):
     if (evt.type == pg.KEYUP and evt.key == pg.K_l):
         if   (lang == lng.FR): lang = lng.EN
         elif (lang == lng.EN): lang = lng.FR
+        iTxt = getText(lang)
 #        elif (lang == lng.EN): lang = lng.DE
 #        elif (lang == lng.DE): lang = lng.IT
 #        elif (lang == lng.IT): lang = lng.FR
-    return (nPpl, stat[0], stat[1], lang)
+    return (nPpl, stat[0], stat[1], iTxt, lang)
 
 def posManager(pPos, pMov):
     nCha = False

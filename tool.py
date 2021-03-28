@@ -9,7 +9,7 @@
 import time
 import random as rng
 from myEnums  import *
-from managers import lng
+#from managers import lng
 
 def res():
     return ([591, 441], 5, 0, 0, [], [], 1, lng.FR, time.time())
@@ -17,6 +17,24 @@ def res():
 def getLife(sTim):
     act = time.time() - sTim
     return 210 - 210 * (act / 514.734)
+
+def getText(lang):
+    fil = open('assets/text/gui.txt')
+    stk = []
+    nls = 0
+
+    for s in fil:
+        if (s == "\n"):
+            nls += 1
+            if (nls > lang.value): break
+            stk = []
+            continue
+        stk.append(s[: len(s) - 1])
+    fil.close()
+    stk[2] = stk[2].split(';')
+    for i in range(5, len(stk)):
+        stk[i] = stk[i].split(';')
+    return stk
 
 def pickText(state, lang):
     fil = open('assets/text/dialog' + str(lang.value) + '.txt')
