@@ -8,8 +8,7 @@
 
 import time
 import random as rng
-from myEnums  import *
-#from managers import lng
+from  myEnums import *
 
 def res():
     return ([591, 441], 5, 0, 0, [], [], 1, lng.FR, time.time())

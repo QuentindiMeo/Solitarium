@@ -16,7 +16,7 @@ from     tool import txt
 
 def getFinalScore(friends, interac, runtime, iTxt):
     sco = 0
-    if (runtime > 5 and friends):
+    if (runtime > 3.14 and friends > 0):
         sco = log(friends) + 22 if (friends < 8)\
         else 27 * (1 / exp(friends)) ** 0.025
         sco = exp(int(sco)) ** 0.2 * (1 + (interac / friends) / 10)

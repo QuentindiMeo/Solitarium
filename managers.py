@@ -20,7 +20,7 @@ def frndManager(evt, pPos, nPpl, stat, iTxt, lang):
         for x in range(len(nPpl)):
             if (chatting(pPos, nPpl[x][0])):
                 stat[1] += 1
-                if (nPpl[x][2] == sts.F_UNKN and rng.randint(0, 99) < 66):
+                if (nPpl[x][2] == sts.F_UNKN and rng.randint(0, 99) < 42):
                     nPpl[x][1] = pg.image.load('assets/img/friend.png')
                     nPpl[x][2] = sts.F_FRND
                     stat[0] += 1
@@ -29,7 +29,7 @@ def frndManager(evt, pPos, nPpl, stat, iTxt, lang):
         for x in range(len(nPpl)):
             if (chatting(pPos, nPpl[x][0])):
                 stat[1] += 1
-                if (nPpl[x][2] == sts.F_UNKN and rng.randint(0, 99) < 77):
+                if (nPpl[x][2] == sts.F_UNKN and rng.randint(0, 99) < 84):
                     nPpl[x][1] = pg.image.load('assets/img/penemy.png')
                     nPpl[x][2] = sts.F_ENMY
                     stat[0] -= 1
@@ -66,9 +66,6 @@ def posManager(pPos, pMov):
         nCha = True
     return (pPos, nCha)
 
-def calc_pSpe(nbFr):
-    return 5 + nbFr * 0.1
-
 def moveManager(evt, pMov, pSpe, nbFr):
     if (evt.type == pg.KEYDOWN):
         if (evt.key == pg.K_RIGHT):
@@ -83,4 +80,4 @@ def moveManager(evt, pMov, pSpe, nbFr):
         pMov[0] = 0
     if (evt.type == pg.KEYUP and (evt.key == pg.K_DOWN  or evt.key == pg.K_UP)):
         pMov[1] = 0
-    return (pMov, calc_pSpe(nbFr))
+    return (pMov, 5 + nbFr * 0.1)

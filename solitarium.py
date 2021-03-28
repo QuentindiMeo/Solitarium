@@ -9,9 +9,9 @@
 import time
 import random as rng
 from      sys import argv as av
-from endgame  import endGame
+from  endgame import endGame
 from managers import *
-from tool     import genNewNPC, get_tBub, getLife, res, txt
+from     tool import genNewNPC, get_tBub, getLife, res, txt
 
 def main():
     pg.init()
@@ -26,14 +26,11 @@ def main():
     sFnt = pg.font.Font('assets/txt.ttf', 48)
     pImg = pg.image.load('assets/img/player.png')
     pBor = pg.image.load('assets/img/border.png')
-    pPos = [591, 441]
-    pMov = [  0,   0]
+    pPos, pMov = [591, 441], [0, 0]
     pSpe = 5
-    nbFr = 0
-    nbIt = 0
+    nbFr, nbIt = 0, 0
     inRm = 1
-    nPos = []
-    nPpl = []
+    nPos, nPpl = [], []
     tBub = [[0, -300], pg.image.load('assets/img/bubble.png'), []]
     nCha = False
     lang = lng.FR
@@ -54,8 +51,8 @@ def main():
                 else: noEsc = False
             (pMov, pSpe) = moveManager(event, pMov, pSpe, nbFr)
             (nPpl, nbFr, nbIt, iTxt, lang) = frndManager(event, pPos, nPpl, [nbFr, nbIt], iTxt, lang)
-#        if (inRm < 10 and rng.randint(0, 127) == 0):
-        if (inRm < 20 and rng.randint(0, 2) == 0):
+        if (inRm < 10 and rng.randint(0, 127) == 0):
+#        if (inRm < 20 and rng.randint(0, 2) == 0):
             newNpc = genNewNPC(nPos)
             nPos.append(newNpc)
             nPpl.append([newNpc, pg.image.load('assets/img/charac.png'), sts.F_UNKN])
