@@ -11,6 +11,9 @@ import random as rng
 from myEnums  import *
 from managers import lng
 
+def res():
+    return ([591, 441], 5, 0, 0, [], [], 1, lng.FR, time.time())
+
 def getLife(sTim):
     act = time.time() - sTim
     return 210 - 210 * (act / 514.734)

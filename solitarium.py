@@ -11,7 +11,7 @@ import random as rng
 from      sys import argv as av
 from endgame  import *
 from managers import *
-from tool     import genNewNPC, get_tBub, getLife
+from tool     import genNewNPC, get_tBub, getLife, res
 
 def main():
     pg.init()
@@ -31,7 +31,7 @@ def main():
     pSpe = 5
     nbFr = 0
     nbIt = 0
-    inTheRoom = 1
+    inRm = 1
     nPos = []
     nPpl = []
     tBub = [[0, -300], pg.image.load('assets/img/bubble.png'), []]
@@ -47,16 +47,16 @@ def main():
                 (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE)):
                 noEsc = False
             if (event.type == pg.KEYDOWN and event.key == pg.K_e):
-                endGame(scr, [fFnt, sFnt], [nbFr, nbIt, sTim], lang)
-                noEsc = False
+                if (not endGame(scr, [fFnt, sFnt], [nbFr, nbIt, sTim], lang)):
+                    (pPos, pSpe, nbFr, nbIt, nPos, nPpl, inRm, lang, sTim) = res()
+                else: noEsc = False
             (pMov, pSpe) = moveManager(event, pMov, pSpe, nbFr)
             (nPpl, nbFr, nbIt, lang) = frndManager(event, pPos, nPpl, [nbFr, nbIt], lang)
-#        if (inTheRoom < 10 and rng.randint(0, 255) == 0):
-        if (inTheRoom < 22 and rng.randint(0, 1) == 0):
+        if (inRm < 10 and rng.randint(0, 255) == 0):
             newNpc = genNewNPC(nPos)
             nPos.append(newNpc)
             nPpl.append([newNpc, pg.image.load('assets/img/charac.png'), sts.F_UNKN])
-            inTheRoom += 1
+            inRm += 1
 #        if   (nbFr > buFr): sFnd.play()
 #        elif (nbFr < buFr): sNmy.play()
 #        buFr = nbFr
@@ -64,7 +64,7 @@ def main():
         if (nCha):
             nPos = []
             nPpl = []
-            inTheRoom = 1
+            inRm = 1
             nCha = False
         scr.fill([22, 22, 22])
         scr.blit(txt(sFnt, "SOLITARIUM", [24, 119, 242]), [460, 16])
@@ -81,8 +81,9 @@ def main():
         scr.blit(pImg, pPos)
         if (noEsc): pg.display.update()
         if (time.time() - sTim > 514.734):
-            endGame(scr, [fFnt, sFnt], [nbFr, nbIt, sTim], lang)
-            noEsc = False
+            if (not endGame(scr, [fFnt, sFnt], [nbFr, nbIt, sTim], lang)):
+                (pPos, pSpe, nbFr, nbIt, nPos, nPpl, inRm, lang, sTim) = res()
+            else: noEsc = False
 
 if (__name__ == "__main__"):
     if ("-h" in av or "--help" in av):
@@ -95,9 +96,11 @@ if (__name__ == "__main__"):
         "ct to the person you just met.\n\n\t\033[1mBackspace\033[0m\n\t\tStra"
         "ight up  insult the person you just met.\n\n\t\033[1ml\033[0m\n\t\tCh"
         "ange the game's language (FR/EN).\n\n\t\033[1me\033[0m\n\t\tPut an en"
-        "d to the ongoing game (then press 'q' to quit).\n\n\t\033[1mEscape"
-        "\033[0m\n\t\tExit the game.\n\n \033[1mAUTHOR\033[0m\n\tWritten by Qu"
-        "entin di Meo.\n\n \033[1mREPORTING BUGS\033[0m\n\tReport any bug or "
-        "functioning error to <quentin.di-meo@epitech.eu>\n")
+        "d to the ongoing game.\n\n\t\033[1mr\033[0m\n\t\tWhen on the end scre"
+        "en, play a new game.\n\n\t\033[1mq\033[0m\n\t\tWhen on the end screen"
+        ", quit.\n\n\t\033[1mEscape\033[0m\n\t\tExit the game.\n\n \033[1mAUTH"
+        "OR\033[0m\n\tWritten by Quentin di Meo.\n\n \033[1mREPORTING BUGS"
+        "\033[0m\n\tReport any bug or functioning error to <quentin.di-meo@"
+        "epitech.eu>\n")
         exit(0)
     main()

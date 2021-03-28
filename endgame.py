@@ -21,8 +21,7 @@ def getFinalScore(friends, interac, runtime):
     return (str(sco), msg)
 
 def x(nb, n):
-    if (n == 1):
-        return 182 - 42 * (len(str(nb)) - 1)
+    if (n == 1): return 182 - 42 * (len(str(nb)) - 1)
     return 486 - 14 * (len(str(nb)) - 1)
 
 def endGame(scr, fnts, stat, lang):
@@ -37,9 +36,13 @@ def endGame(scr, fnts, stat, lang):
     scr.blit(txt(fnts[0], "Final score: " + fSco), [x(fSco, 2), 360])
     for i in range(len(footnote)):
         scr.blit(txt(fnts[0], footnote[i]), [600 - 7.5 * len(footnote[i]), 540 + i * 30])
+    scr.blit(txt(fnts[0], "Press 'q' to quit, 'r' to play again."), [325, 777])
     pg.display.update()
     while (quitting == False):
         for event in pg.event.get():
             if (event.type == pg.KEYDOWN and\
                 (event.key == pg.K_q or event.key == pg.K_ESCAPE)):
                 quitting = True
+            if (event.type == pg.KEYUP and event.key == pg.K_r):
+                return False
+    return True
