@@ -20,7 +20,7 @@ def frndManager(evt, pPos, nPpl, stat, iTxt, lang):
         for x in range(len(nPpl)):
             if (chatting(pPos, nPpl[x][0])):
                 stat[1] += 1
-                if (nPpl[x][2] == sts.F_UNKN and rng.randint(0, 99) < 42):
+                if (nPpl[x][2] == sts.F_UNKN and rng.randint(0, 99) < 21):
                     nPpl[x][1] = pg.image.load('assets/img/friend.png')
                     nPpl[x][2] = sts.F_FRND
                     stat[0] += 1

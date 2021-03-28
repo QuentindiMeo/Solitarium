@@ -7,23 +7,34 @@
 ##
 
 import random as rng
-import time
+import   time
 import pygame as pg
 from     math import exp, log
 from      sys import exit
-from  myEnums import lng
+from  myEnums import lng, fin
 from     tool import txt
 
-def getFinalScore(friends, interac, runtime, iTxt):
+def getFinale(friends, interac, runtime, iMsg):
     sco = 0
+    rtm = runtime / 3
+    rtl = runtime / 9
+
     if (runtime > 3.14 and friends > 0):
         sco = log(friends) + 22 if (friends < 8)\
-        else 27 * (1 / exp(friends)) ** 0.025
+            else 27 * (1 / exp(friends)) ** 0.025
         sco = exp(int(sco)) ** 0.2 * (1 + (interac / friends) / 10)
-    if (1):
-        msg = iTxt[rng.randint(5, len(iTxt) - 1)]
-    print (  "f=", friends, "\ti=", interac, "\tt=", runtime,\
-           "\ts=", str(int(sco)), sep="")
+    if   (friends > 7)  : msg = iMsg[fin.S_TMFRIENDS.value]
+    elif (friends < 0)  : msg = iMsg[fin.S_NGFRIENDS.value]
+    elif (interac > rtm): msg = iMsg[fin.S_TMINTERAC.value]
+    elif (not interac)  : msg = iMsg[fin.S_NOINTERAC.value]
+    elif (not friends)  : msg = iMsg[fin.S_NOFRIENDS.value]
+    elif (interac < rtl): msg = iMsg[fin.S_TLINTERAC.value]
+    elif (friends < 8 and\
+          interac < rtm): msg = iMsg[rng.randint(fin.S_ALLGOODMN.value, fin.S_ALLGOODMX.value)]
+    elif (friends < 4)  : msg = iMsg[fin.S_TLFRIENDS.value]
+    else                : msg = []
+#    print (  "f=", friends, "\ti=", interac, "\tt=", runtime,\
+#           "\ts=", str(int(sco)), sep="")
     return (str(int(sco)), msg)
 
 def x(nb, n = 2):
@@ -32,7 +43,7 @@ def x(nb, n = 2):
 def endGame(scr, fnts, stat, iTxt):
     quitting = False
     gFnt = pg.font.Font('assets/txt.ttf', 70)
-    (fSco, footnote) = getFinalScore(stat[0], stat[1], round(time.time() - stat[2], 2), iTxt)
+    (fSco, footnote) = getFinale(stat[0], stat[1], round(time.time() - stat[2], 2), iTxt[5:])
 
     pg.mixer.music.stop()
     scr.fill([22, 22, 22])

@@ -4,6 +4,15 @@ Vous vous êtes fait ; amis.
 Score final : 
 Appuyez sur 'q' pour quitter, 'r' pour rejouer.
 Il faut savoir se poser les bonnes questions.;Les amis mentent aussi.
+Un des premiers symptômes de dépressif chez les extravertis est;de chercher l'interaction sociale à tout prix.
+Être odieux n'a jamais desservi aucune cause.;Le sourire est en revanche un remède face à tous maux.
+S'isoler est souvent la première étape d'un douloureux périple.;Nouer des liens d'amitié est par exemple une manière;très efficace de faire le chemin inverse.
+"L'homme est un animal social.";- Aristote
+Compter sur les autres, c'est bien.;Qu'on puisse compter sur soi, c'est aussi important.; Qu'ils puissent compter sur nous, c'est bien mieux.;Vous faites preuve des trois, et c'est merveilleux.
+Je suis jaloux de ne pas être votre ami, mais vous êtes si bien;entouré que je ne saurais déranger votre équilibre.
+"Vous êtes une ouverture par laquelle;l'univers se regarde et s'explore.";- Alan Watts
+Si l'être humain possède des jambes, c'est pour voir du monde.;Que se passe-t-il dans les autres salles ? Le craignez-vous ?
+Entouré d'ennemis comme d'amis, l'absence d'interaction;est une source de chaos tout à fait catastrophique.
 
 Friends: 
 Life:
@@ -11,3 +20,12 @@ You made ; friends.
 Final score: 
 Press 'q' to quit, 'r' to play again.
 You may want to reconsider your life choices.;Friends lie too.
+One of the most blatant symptoms that an extrovert suffers from depression;is that they are looking for social interaction at all costs.
+Being obnoxious never helped solved anything.;On the other hand, smiling can be the root of fulfillment.
+Isolation is very often the first step on a very dangerous road.;Friendships are an example of a good mean to walk the other way.
+"Man is by nature a political animal.";- Aristotle
+Relying on the others, is fine.;Relying on yourself, is also very important.; Them being able to rely on you, is even better.;You do all three, and it's wonderful.
+I'm very jealous that I'm not a friend of yours, but you're surrounded;by such amazing people that I wouldn't dare disturb your equilibrium.
+"You are an aperture through which the universe;is looking at and exploring itself.";- Alan Watts
+The human being has two legs for a reason. What could possibly;be happening in the other rooms? Do you fear it in a way?
+Regardless of who you run with, the lack of social;interaction leads to chaos at a very rapid rate.

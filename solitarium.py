@@ -6,7 +6,7 @@
 ## main jamgame
 ##
 
-import time
+import   time
 import random as rng
 from      sys import argv as av
 from  endgame import endGame
@@ -52,7 +52,6 @@ def main():
             (pMov, pSpe) = moveManager(event, pMov, pSpe, nbFr)
             (nPpl, nbFr, nbIt, iTxt, lang) = frndManager(event, pPos, nPpl, [nbFr, nbIt], iTxt, lang)
         if (inRm < 10 and rng.randint(0, 127) == 0):
-#        if (inRm < 20 and rng.randint(0, 2) == 0):
             newNpc = genNewNPC(nPos)
             nPos.append(newNpc)
             nPpl.append([newNpc, pg.image.load('assets/img/charac.png'), sts.F_UNKN])

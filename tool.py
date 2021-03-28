@@ -6,7 +6,7 @@
 ## jamgame tool functions
 ##
 
-import time
+import   time
 import random as rng
 from  myEnums import *
 
