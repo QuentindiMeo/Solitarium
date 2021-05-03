@@ -68,16 +68,10 @@ def posManager(pPos, pMov):
 
 def moveManager(evt, pMov, pSpe, nbFr):
     if (evt.type == pg.KEYDOWN):
-        if (evt.key == pg.K_RIGHT):
-            pMov[0] = pSpe
-        if (evt.key == pg.K_LEFT):
-            pMov[0] = -pSpe
-        if (evt.key == pg.K_DOWN):
-            pMov[1] = pSpe
-        if (evt.key == pg.K_UP):
-            pMov[1] = -pSpe
-    if (evt.type == pg.KEYUP and (evt.key == pg.K_RIGHT or evt.key == pg.K_LEFT)):
-        pMov[0] = 0
-    if (evt.type == pg.KEYUP and (evt.key == pg.K_DOWN  or evt.key == pg.K_UP)):
-        pMov[1] = 0
+        if (evt.key == pg.K_RIGHT): pMov[0] = pSpe
+        if (evt.key == pg.K_LEFT) : pMov[0] = -pSpe
+        if (evt.key == pg.K_DOWN) : pMov[1] = pSpe
+        if (evt.key == pg.K_UP)   : pMov[1] = -pSpe
+    if (evt.type == pg.KEYUP and (evt.key == pg.K_RIGHT or evt.key == pg.K_LEFT)): pMov[0] = 0
+    if (evt.type == pg.KEYUP and (evt.key == pg.K_DOWN  or evt.key == pg.K_UP))  : pMov[1] = 0
     return (pMov, 5 + nbFr * 0.1)
