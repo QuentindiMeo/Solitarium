@@ -1,0 +1,45 @@
+THÈME : Us (Together)
+go jeu 2D, développer l'idée 3h, facile à tester/--help, Retro Sound Effect BXR, Ogmo Editor/Tiled Editor
+validation (mandatory) : qualité de présentation à la fin (PPT), accomplissement des défis*, originalité
+contraintes : multi-langues
+
+défis : référence à une série, max 6 couleurs, nyan cat ou rickroll, parler de la jam sur insta
+
+-> 17h   brainstorming
+-> 18h30 coaching Alexandra
+-> 21h   créer groupe intra
+
+Samedi   10h30->12h et 14h->15h : séances de coaching
+Dimanche 23h42 clôture
+
+repo : "EPITECH JAM-US"
+
+[X] Bord, titre, icône, assets
+[X] Makefile qui fait plaisir
+[X] Gestion du mouvement
+[X] Détection de collision
+[X] Interactions et compteurs
+[X] Enums pour la propreté
+[X] Génération de PNJs et rng qui régale
+[X] Bulles de dialogue
+[X] Pouvoir changer de room
+[X] Barre de vie qui s'écoule (fin de musique)
+[X] Valeurs et graph, math pour score
+[X] Outil auto pour texte pygame, centrage
+[X] Bonus : Rickroll/Nyancat --- < 6 couleurs --- story insta
+[X] Écran de fin (+ stop musique)
+[X] Messages de fin
+[X] Musique de fond / OST
+[X] Multilingue / Traduction
+
+[ ] Écran de lancement
+[ ] Pouvoir faire pause sur la musique
+[ ] Bruit quand on a une interaction/nv ami/nv ennemi
+[ ] Musique de fin
+[ ] Italien ? Allemand ? Roumain ?
+[ ] + de fins possibles
+[ ] Affinage de l'algo de score
+[ ] Leaderboard
+[ ] Sauvegarde de partie
+[ ] + de dialogues / pouvoir les enchaîner
+[ ] Pouvoir casser une amitié/rivalité
